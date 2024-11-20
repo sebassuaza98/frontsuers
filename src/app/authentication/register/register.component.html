@@ -1,0 +1,92 @@
+<div class="relative min-h-screen flex justify-start items-start bg-transparent rounded-3xl shadow-xl">
+  <div class="flex-col flex self-start lg:px-14 sm:max-w-4xl xl:max-w-md z-10">
+    <div class="self-start hidden lg:flex flex-col text-gray-300">
+    </div>
+  </div>
+  <div class="flex justify-start self-start z-10">
+    <div class="p-12 bg-white mx-auto rounded-3xl w-[36rem] border-4 border-purple-500">
+      <div *ngIf="errorMessage" class="text-red-500 text-center mb-4">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="text-green-500 text-center mb-4">{{ successMessage }}</div>
+
+      <form (ngSubmit)="registerUser()" #registerForm="ngForm" class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Columna 1 -->
+          <div class="mb-4">
+            <input [(ngModel)]="user.identificacion" name="identificacion" #identificacion="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="text" id="identificacion" placeholder="Identificación" required />
+            <div *ngIf="identificacion.invalid && identificacion.touched" class="text-red-500 text-sm">Identificación es obligatoria.</div>
+          </div>
+
+          <div class="mb-4">
+            <input [(ngModel)]="user.name" name="name" #name="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="text" id="name" placeholder="Nombre" required />
+            <div *ngIf="name.invalid && name.touched" class="text-red-500 text-sm">Nombre es obligatorio.</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="mb-4">
+            <input [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="text" id="lastName" placeholder="Apellido" required />
+            <div *ngIf="lastName.invalid && lastName.touched" class="text-red-500 text-sm">Apellido es obligatorio.</div>
+          </div>
+          <div class="mb-4">
+            <input [(ngModel)]="user.email" name="email" #email="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="email" id="email" placeholder="Email" required />
+            <div *ngIf="email.invalid && email.touched" class="text-red-500 text-sm">Email es obligatorio.</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="mb-4">
+            <input [(ngModel)]="user.password" name="password" #password="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="password" id="password" placeholder="Contraseña" required />
+            <div *ngIf="password.invalid && password.touched" class="text-red-500 text-sm">Contraseña es obligatoria.</div>
+          </div>
+          <div class="mb-4">
+            <input [(ngModel)]="user.confirmPassword" name="confirm" #confirm="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="password" id="confirm" placeholder="Confirmar contraseña" required />
+            <div *ngIf="confirm.invalid && confirm.touched" class="text-red-500 text-sm">Confirmar contraseña es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="mb-4">
+            <input [(ngModel)]="user.phone" name="phone" #phone="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="text" id="phone" placeholder="Teléfono" required />
+            <div *ngIf="phone.invalid && phone.touched" class="text-red-500 text-sm">Teléfono es obligatorio.</div>
+          </div>
+          <div class="mb-4">
+            <input [(ngModel)]="user.address" name="address" #address="ngModel" 
+              class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+              type="text" id="address" placeholder="Dirección" required />
+            <div *ngIf="address.invalid && address.touched" class="text-red-500 text-sm">Dirección es obligatoria.</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-700 font-semibold">Rol</p>
+          <select [(ngModel)]="user.role" name="role" #role="ngModel" 
+            class="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" 
+            required>
+            <option value="Ciudadano">Ciudadano</option>
+            <option value="Administrador">Administrador</option>
+          </select>
+          <div *ngIf="role.invalid && role.touched" class="text-red-500 text-sm">El rol es obligatorio.</div>
+        </div>
+        <button 
+          type="submit" 
+          [disabled]="registerForm.invalid" 
+          [ngClass]="{'bg-purple-800': registerForm.valid, 'bg-gray-400': !registerForm.valid}"
+          class="w-full mt-4 py-3 text-white font-semibold rounded-lg shadow-md"
+        >
+          Registrar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
